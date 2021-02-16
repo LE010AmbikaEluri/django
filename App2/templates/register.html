@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form  method="POST" action="#">
+        <div class="form-group col-lg-4">
+        <h1>Register form</h1>
+        {% csrf_token %}
+        FirstName:<input class="form-control" type="text" name="fname" required><br><br>
+        RollNo:<input class="form-control" type="text" name="roll_no" required><br><br>
+        Mail-id:<input  class="form-control" type="text" name="email" required><br><br>
+        PhoneNO:<input  class="form-control" type="number" name="phoneno" required><br><br>
+        DateOfBirth:<input type="date" name="Date_Of_Birth"><br><br>
+        Gender:<br>
+               <input type="radio" name="Gender" value="Female">Female<br>
+               <input type="radio" name="Gender" value="Male">male<br>  
+        Address:<textarea cols='80' rows="3" name="Address"></textarea>   
+        <button class="btn btn-primary" type="submit">submit</button>
+    </div>
+    </form>
+    
+{% endblock %}

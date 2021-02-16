@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form  method="POST" action="#">
+        <div class="form-group col-lg-4">
+        <h1>Register form</h1>
+        {% csrf_token %}
+        FirstName:<input class="form-control" type="text" name="fname"  value="{{data.FullName}}" required><br><br>
+        RollNo:<input class="form-control" type="text" name="roll_no" value="{{data.RollNo}}"  required><br><br>
+        Mail-id:<input  class="form-control" type="text" name="email" value="{{data.EmailId}}" required><br><br>
+        PhoneNO:<input  class="form-control" type="number" name="phoneno" value="{{data.MobileNo}}"  required><br><br>
+        DateOfBirth:<input type="date" name="Date_Of_Birth"><br><br>
+        Gender:<br>
+               <input type="radio" name="Gender" value="Female" >{% if data.Gender == "Female"%} checked{% endif %}>Female<br>
+               <input type="radio" name="Gender" value="Male">{% if data.gemder == "Male"%} checked{% endif %}>male<br>     
+        <button class="btn btn-primary" type="submit">update</button>
+    </div>
+    </form>
+    
+{% endblock %}
