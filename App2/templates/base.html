@@ -10,19 +10,31 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">New</a>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">WebSiteName</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">about</a></li>
+      </ul>
+      <ul class="nav navbar-nav ml-auto">
+        {% if not user.is_authrnticated %}
+        <li class="active"><a href="{% url 'login' %}">login</a></li>
+        <li><a href="{% url 'signupform' %}">signup</a></li>
+        {% else %}
+        <li class="nav-item"><a href="#">Logout</a></li>
+        <li class="nav-item"><a href=" {% url 'profile'  %} ">Profile</a></li>
+        {% endif %}
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Re-register</a></li>
-      <li><a href="#">Apply</a></li>
-      <li><a href="#">Cancelition</a></li>
-    </ul>
-  </div>
-</nav>
+  </nav>
+    
+    
+    
+  
+
   
 {%block content%}
 {% endblock %}

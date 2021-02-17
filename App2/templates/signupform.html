@@ -1,6 +1,6 @@
 
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
+
 {% block content %}
 <form method="POST" action="#">
     <div class="container">
@@ -18,9 +18,8 @@
             </div>
             <div class="card-body">
                 {% csrf_token %}
-               <!-- {{ form.as_p}}-->
-               {{ form|crispy }}
-
+                {{sform.as_p}}
+ 
             </div>
             
             <div class="card-footer ">

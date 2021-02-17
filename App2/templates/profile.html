@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1> {{request.user.username}}   </h1>
+        <table class="table table-bordered">
+            <tr>
+                <th>FullName:</th>
+                <td>{{user.first_name}} {{user.last_name}}    </td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>{{user.email}}    </td>
+            </tr>
+            <tr>
+                <th>age:</th>
+                <td>   {{pro.age}} </td>
+            </tr>
+            <tr>
+                <th><img src=" {{user.userprofile.image.url}}" style="width: 50px;height: 50px;"</th>
+            </tr>
+        </table>
+
+    </div>
+
+    
+{% endblock %}

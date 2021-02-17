@@ -1,8 +1,13 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 import random
-from App2.models import student
-from App2.forms import StudentForm
+from App2.models import student,Registration,UserProfile
+from App2.forms import StudentForm,RegisterForm
+from django.contrib import messages
+from DjangoProject import settings
+from django.core.mail import send_mail
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 def stat(request):
@@ -65,9 +70,46 @@ def signup(request):
         form=StudentForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request,"successfully Registered....!")
             return redirect('signup')
     form=StudentForm()
-    return render(request,"signup.html",{'form':form})         
+    return render(request,"signup.html",{'form':form})   
+
+
+def registration(request):
+    if request.method == 'POST':
+        uname = request.POST.get('uname')
+        email = request.POST.get('email')
+        password = request.POST.get('pwsd')
+        im = request.FILES['image']
+        Registration.objects.create(Username=uname,Email=email,Password=password,Image=im)
+        sub = 'reg welcome message'
+        body = 'uname'+uname+'password'+password
+        receiver = email
+        sender = settings.EMAIL_HOST_USER
+        send_mail(sub,body,sender,[receiver])
+        return redirect('showdata')
+    return render(request,'registration.html')          
+
+def showdata(request):
+    data = Registration.objects.all()
+    return render(request,'showdata.html',{'data':data})    
+
+
+def signupform(request):
+    if request.method == 'POST':
+        sform = RegisterForm(request.POST)
+        if sform.is_valid:
+            sform.save()
+            return HttpResponse('Succsusfully Registered')
+    else:
+        sform = RegisterForm()
+        return render(request,'signupform.html',{'sform':sform})   
+
+def profile(request):
+    user = User.objects.get(request.user.id)
+    pro= UserProfile.objects.get(user=user)
+    return render(request,'profile.html',{'user':user,'pro':pro})         
 
 
 
